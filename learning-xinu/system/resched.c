@@ -45,6 +45,18 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	/* Old process returns here when resumed */
 
+	// print all the details of all the processes
+	for (int i = 0; i < NPROC; i++) {
+		kprintf("Process Name: %s\n", proctab[i].prname);
+		kprintf("Process ID: %d\n", i);
+		kprintf("Process State: %d\n", proctab[i].prstate);
+		kprintf("Process Priority: %d\n", proctab[i].prprio);
+		kprintf("Process Stack Base: %d\n", proctab[i].prstkbase);
+		kprintf("Process Stack Length: %d\n", proctab[i].prstklen);
+		kprintf("Process Stack Pointer: %d\n", proctab[i].prstkptr);
+		kprintf("\n");
+	}
+
 	return;
 }
 

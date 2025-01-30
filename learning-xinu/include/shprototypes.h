@@ -13,6 +13,9 @@ extern	shellcmd  xsh_cat	(int32, char *[]);
 /* in file xsh_clear.c */
 extern	shellcmd  xsh_clear	(int32, char *[]);
 
+/* concurrent.c */
+extern int concurrent();
+
 /* in file xsh_date.c */
 extern	shellcmd  xsh_date	(int32, char *[]);
 
@@ -30,6 +33,9 @@ extern	shellcmd  xsh_exit	(int32, char *[]);
 
 /* in file xsh_help.c */
 extern	shellcmd  xsh_help	(int32, char *[]);
+
+/* in file xsh_hello.c */
+extern int xsh_hello(int32, char *[]);
 
 /* in file xsh_kill.c */
 extern	shellcmd  xsh_kill	(int32, char *[]);
@@ -81,6 +87,3 @@ extern	shellcmd  xsh_help	(int32, char *[]);
 
 /* in file xsh_tee.c */
 extern	shellcmd  xsh_tee	(int32, char *[]);
-
-/* custom added functions here */
-extern int hello ();

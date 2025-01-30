@@ -8,7 +8,6 @@
 /* Table of Xinu shell commands and the function associated with each	*/
 /************************************************************************/
 const	struct	cmdent	cmdtab[] = {
-	{"hello",	hello},
 	{"argecho",	xsh_argecho},
 	{"arp",		xsh_arp},
 	{"cat",		xsh_cat},
@@ -16,6 +15,8 @@ const	struct	cmdent	cmdtab[] = {
 	{"date",	xsh_date},
 	{"devdump",	xsh_devdump},
 	{"echo",	xsh_echo},
+	{"hello", xsh_hello},
+	{"concurrent", concurrent},
 	{"help",	xsh_help},
 	{"ls"	,	xsh_ls},
 	{"kill",	xsh_kill},
@@ -124,7 +125,7 @@ process	shell (
 	bool8	err;			/* Did an error occur?		*/
 	int32	msg;			/* Message from receive() for	*/
 					/*   child termination		*/
-	int32	tmparg;			/* Temporary address used when	*/ 
+	int32	tmparg;			/* Temporary address used when	*/
 					/*   creating a child process;	*/
 					/*   later replaced by addargs	*/
 
@@ -218,9 +219,9 @@ process	shell (
 				/* Finish old segment and start new */
 
 				segptr->send = i - 1;
-				
+
 				/* Check for empty segment */
-				
+
 				if (segptr->sstart > segptr->send) {
 				    fprintf(dev,"%s\n", SHELL_SYNERRMSG);
 				    break;
@@ -302,7 +303,7 @@ process	shell (
 		    p = &tokbuf[tok[segptr->sstart]];
 		    cindex = cmdlookup(p);
 		    if (cindex == SYSERR) {
-			fprintf(dev, "command %s not found\n", p); 
+			fprintf(dev, "command %s not found\n", p);
 			break;
 		    }
 		    segptr->scindex = cindex;
@@ -434,7 +435,7 @@ process	shell (
 		/*   in background					*/
 
 		pid32	tmppid = segtab[nsegs-1].spid; /* Last seg. pid	*/
-									
+
 		if (! backgnd) {
 			msg = receive();
 			while (msg != tmppid) {
